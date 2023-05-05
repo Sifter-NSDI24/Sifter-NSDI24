@@ -1,3 +1,5 @@
+### This is the VHDL implementation of Sifter hardware prototype
+
 To run simulations:
 
 Required packages:
