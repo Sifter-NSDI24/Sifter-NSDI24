@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fpga02/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/sw/enyx-hw-mmio-test/main.cpp
+iostream
+-
+fstream
+-
+sstream
+-
+mutex
+-
+chrono
+-
+thread
+-
+cmath
+-
+enyx/hw/accelerator.hpp
+-
+enyx/hw/core.hpp
+-
+enyx/hw/core_tree.hpp
+-
+enyx/hw/core_descriptions.hpp
+-
+enyx/hw/register_io.hpp
+-
+enyx/hw/xml_file_locations.hpp
+-
+enyx/hw/mmio.hpp
+-
+

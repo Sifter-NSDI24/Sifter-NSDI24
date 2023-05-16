@@ -1,0 +1,140 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:47:39 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Thu May  4 02:39:32 2023
+# Process ID: 2577046
+# Current directory: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build
+# Command line: vivado -journal logs/sta.jou -log logs/sta.log -mode batch -source ../sta.tcl
+# Log file: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/logs/sta.log
+# Journal file: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/logs/sta.jou
+# Running On: ratio, OS: Linux, CPU Frequency: 1300.000 MHz, CPU Physical cores: 8, Host memory: 33525 MB
+#-----------------------------------------------------------
+source ../sta.tcl
+# open_project synth_00
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/synth_00.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2021.2/data/ip'.
+INFO: [Device 21-403] Loading part xcu250-figd2104-2L-e
+open_project: Time (s): cpu = 00:00:41 ; elapsed = 00:00:44 . Memory (MB): peak = 3441.293 ; gain = 727.566 ; free physical = 17955 ; free virtual = 28129
+# open_run impl_1
+Netlist sorting complete. Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 3894.363 ; gain = 8.000 ; free physical = 17481 ; free virtual = 27655
+INFO: [Netlist 29-17] Analyzing 6007 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 2 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2021.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Power 33-23] Power model is not available for b_flash.inst_startupe3_flash_prim
+INFO: [Power 33-23] Power model is not available for b_fpga_serial_id.dna_porte2_inst
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 6479.426 ; gain = 217.656 ; free physical = 15223 ; free virtual = 25396
+Restored from archive | CPU: 18.570000 secs | Memory: 285.822380 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 6479.426 ; gain = 217.656 ; free physical = 15222 ; free virtual = 25395
+Generating merged BMM file for the design top 'shell_top_xilinx_u200_u250_mem_eth_dyn'...
+INFO: [Memdata 28-144] Successfully populated the BRAM INIT strings from the following elf files: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/ips/xilinx_cms_subsystem/fw/cms.elf /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/ips/xilinx_cms_subsystem/fw/cms.elf /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/ips/xilinx_cms_subsystem/fw/cms.elf 
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 6511.441 ; gain = 0.000 ; free physical = 15253 ; free virtual = 25427
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1411 instances were transformed.
+  DSP48E1 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 4 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 7 instances
+  IBUFDS => IBUFDS (DIFFINBUF, IBUFCTRL): 1 instance 
+  IOBUF => IOBUF (IBUFCTRL, INBUF, OBUFT): 6 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 79 instances
+  RAM16X1D => RAM32X1D (RAMD32(x2)): 4 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 31 instances
+  RAM32M16 => RAM32M16 (RAMD32(x14), RAMS32(x2)): 433 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 149 instances
+  RAM32X1S => RAM32X1S (RAMS32): 16 instances
+  RAM64M => RAM64M (RAMD64E(x4)): 40 instances
+  RAM64M8 => RAM64M8 (RAMD64E(x8)): 617 instances
+  RAM64X1D => RAM64X1D (RAMD64E(x2)): 24 instances
+
+open_run: Time (s): cpu = 00:05:06 ; elapsed = 00:04:12 . Memory (MB): peak = 6511.441 ; gain = 3070.148 ; free physical = 15253 ; free virtual = 25427
+# report_utilization -file reports/report_utilization.txt
+report_utilization: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 6511.441 ; gain = 0.000 ; free physical = 15228 ; free virtual = 25402
+# config_timing_corners -corner Slow -delay_type none
+# config_timing_corners -corner Fast -delay_type min
+# update_timing
+update_timing: Time (s): cpu = 00:01:55 ; elapsed = 00:00:17 . Memory (MB): peak = 6511.441 ; gain = 0.000 ; free physical = 15152 ; free virtual = 25326
+# report_timing_summary -max_paths 1 -delay_type min -report_unconstrained -check_timing_verbose -file reports/report_timing_summary.txt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:19 ; elapsed = 00:00:09 . Memory (MB): peak = 6672.457 ; gain = 161.016 ; free physical = 15064 ; free virtual = 25239
+# report_timing_summary -max_paths 1 -delay_type min -report_unconstrained -check_timing_verbose -file reports/TNS_hold.txt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:17 ; elapsed = 00:00:08 . Memory (MB): peak = 6690.457 ; gain = 18.000 ; free physical = 15050 ; free virtual = 25227
+# config_timing_corners -corner Slow -delay_type none
+# config_timing_corners -corner Fast -delay_type max
+# update_timing
+update_timing: Time (s): cpu = 00:01:52 ; elapsed = 00:00:16 . Memory (MB): peak = 6690.457 ; gain = 0.000 ; free physical = 15059 ; free virtual = 25235
+# report_timing_summary -max_paths 1 -delay_type max -report_unconstrained -check_timing_verbose -file reports/report_timing_summary.txt -append
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:17 ; elapsed = 00:00:08 . Memory (MB): peak = 6710.457 ; gain = 20.000 ; free physical = 15040 ; free virtual = 25218
+# config_timing_corners -corner Slow -delay_type min
+# config_timing_corners -corner Fast -delay_type none
+# update_timing
+update_timing: Time (s): cpu = 00:01:53 ; elapsed = 00:00:17 . Memory (MB): peak = 6710.457 ; gain = 0.000 ; free physical = 15051 ; free virtual = 25229
+# report_timing_summary -max_paths 1 -delay_type min -report_unconstrained -check_timing_verbose -file reports/report_timing_summary.txt -append
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:17 ; elapsed = 00:00:08 . Memory (MB): peak = 6719.457 ; gain = 9.000 ; free physical = 15027 ; free virtual = 25206
+# config_timing_corners -corner Slow -delay_type max
+# config_timing_corners -corner Fast -delay_type none
+# update_timing
+update_timing: Time (s): cpu = 00:01:54 ; elapsed = 00:00:16 . Memory (MB): peak = 6719.457 ; gain = 0.000 ; free physical = 15039 ; free virtual = 25218
+# report_timing_summary -max_paths 100 -delay_type max -report_unconstrained -check_timing_verbose -file reports/report_timing_summary.txt -append
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:20 ; elapsed = 00:00:11 . Memory (MB): peak = 6724.457 ; gain = 5.000 ; free physical = 14950 ; free virtual = 25166
+# report_timing_summary -max_paths 100 -delay_type max -report_unconstrained -check_timing_verbose -file reports/TNS_setup.txt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-436] There are set_bus_skew constraint(s) in this design. Please run report_bus_skew to ensure that bus skew requirements are met.
+report_timing_summary: Time (s): cpu = 00:00:22 ; elapsed = 00:00:11 . Memory (MB): peak = 6724.457 ; gain = 0.000 ; free physical = 14910 ; free virtual = 25164
+# config_timing_corners -corner Slow -delay_type none
+WARNING: [Timing 38-434] All timing corners have been disabled. Timing analysis will not produce any timing results
+# config_timing_corners -corner Fast -delay_type min
+# update_timing
+update_timing: Time (s): cpu = 00:01:56 ; elapsed = 00:00:17 . Memory (MB): peak = 6752.457 ; gain = 28.000 ; free physical = 14944 ; free virtual = 25198
+# report_bus_skew -max_path 1 -delay_type min -sort_by_slack -file reports/report_bus_skew.txt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# config_timing_corners -corner Slow -delay_type none
+# config_timing_corners -corner Fast -delay_type max
+# update_timing
+update_timing: Time (s): cpu = 00:01:52 ; elapsed = 00:00:16 . Memory (MB): peak = 6752.457 ; gain = 0.000 ; free physical = 14944 ; free virtual = 25198
+# report_bus_skew -max_path 1 -delay_type max -sort_by_slack -file reports/report_bus_skew.txt -append
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# config_timing_corners -corner Slow -delay_type min
+# config_timing_corners -corner Fast -delay_type none
+# update_timing
+update_timing: Time (s): cpu = 00:01:52 ; elapsed = 00:00:16 . Memory (MB): peak = 6752.457 ; gain = 0.000 ; free physical = 14945 ; free virtual = 25201
+# report_bus_skew -max_path 1 -delay_type min -sort_by_slack -file reports/report_bus_skew.txt -append
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# config_timing_corners -corner Slow -delay_type max
+# config_timing_corners -corner Fast -delay_type none
+# update_timing
+update_timing: Time (s): cpu = 00:01:54 ; elapsed = 00:00:17 . Memory (MB): peak = 6752.457 ; gain = 0.000 ; free physical = 14937 ; free virtual = 25193
+# report_bus_skew -max_path 1 -delay_type max -sort_by_slack -file reports/report_bus_skew.txt -append
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# close_project
+close_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 6752.457 ; gain = 0.000 ; free physical = 16779 ; free virtual = 27036
+INFO: [Common 17-206] Exiting Vivado at Thu May  4 02:48:04 2023...

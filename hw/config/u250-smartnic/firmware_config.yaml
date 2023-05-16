@@ -1,0 +1,286 @@
+Board configuration:
+
+# PCIe must be enabled, and set to Gen 3 x8 with data width 256
+    PCIE_EN: 1
+    PCIE_GEN: 3
+    PCIE_LANE_COUNT: 8
+    PCIE_DATA_WIDTH: 256
+
+# First custom clock enabled. This clock will be used only for the TCP memory management logic and only for that. This is an optimisation for the TCP stack to close timings more easily, without impacting the latency of either direction since it only affects the retransmission memory logic
+    CUSTOM_CLK_0_EN: 1
+    CUSTOM_CLK_0_FREQ_MHZ: 160.00
+
+################
+## PHY CONFIG ##
+################
+
+# Enabling here the physical QSFP channels, and mapping them to virtual "PHY" interfaces which will later be configured.
+# This enabled easy re-mapping of the PHYs to different QSFP locations
+    QSFP0_0_EN: 1
+    QSFP0_0_PHY_SELECT: PHY0
+    QSFP0_1_EN: 1
+    QSFP0_1_PHY_SELECT: PHY1
+    QSFP0_2_EN: 1
+    QSFP0_2_PHY_SELECT: PHY2
+
+# Enabling and configuring here a virtual "PHY" interface.
+    PHY0_EN: 1
+    PHY0_SPEED: 10G
+    PHY0_PCS_ENYX: 1
+    PHY0_PCS_RX_PIPE_COUNT: 0
+    PHY0_PCS_TX_PIPE_COUNT: 0
+    PHY0_MAC_DATA_WIDTH: 32
+    PHY0_MAC_RX_MIN_PKT_LENGTH: 1
+# Selection of the clock used for the MAC Rx interface, as well as all logic associated to it (TCP stack, UDP stack and RAW interface), but the sandbox corresponding interfaces are set elsewhere.
+# If any of the sandbox corresponding interfaces are set to a different clock, then dual clock FIFOs will be automatically added between the PHY logic (TCP stack, UDP stack and RAW interface) and the corresponding sandbox interface.
+# If PHY0_PMA_RX_CLK is selected, then no dual clock FIFO will be added inside the MACPCS core, but any other clock will automatically force a dual clock FIFO.
+    PHY0_MAC_RX_CLK: PHY0_PMA_TX_CLK
+    PHY0_MAC_RX_PIPE_COUNT: 0
+# Selection of the clock used for the MAC Tx interface, as well as all logic associated to it (TCP stack, UDP stack and RAW interface), but the sandbox corresponding interfaces are set elsewhere.
+# If any of the sandbox corresponding interfaces are set to a different clock, then dual clock FIFOs will be automatically added between the PHY logic (TCP stack, UDP stack and RAW interface) and the corresponding sandbox interface.
+# If PHY0_PMA_TX_CLK is selected, then no dual clock FIFO will be added inside the MACPCS core, but any other clock will automatically force a dual clock FIFO.
+# If either TCP or UDP stack is enabled on the PHY, PHY0_MAC_RX_CLK and PHY0_MAC_TX_CLK must be set to the same exact clock since neither the TCP nor the UDP stacks currently support two different clock domains for the two Tx and Rx directions.
+# IFG (Interframe Gap) is set at 12 Bytes by default if not specified. Setting IFG at 8 Bytes gives better bandwidth.
+    PHY0_MAC_TX_CLK: PHY0_PMA_TX_CLK
+    PHY0_MAC_TX_PIPE_COUNT: 1
+    PHY0_MAC_TX_IFG_COUNT: 8
+    PHY0_HOST_NIC_EN: 1
+
+    PHY1_EN: 1
+    PHY1_SPEED: 10G
+    PHY1_PCS_ENYX: 1
+    PHY1_PCS_RX_PIPE_COUNT: 0
+    PHY1_PCS_TX_PIPE_COUNT: 0
+    PHY1_MAC_DATA_WIDTH: 32
+    PHY1_MAC_RX_MIN_PKT_LENGTH: 1
+    PHY1_MAC_RX_CLK: PHY1_PMA_TX_CLK
+    PHY1_MAC_RX_PIPE_COUNT: 0
+    PHY1_MAC_TX_CLK: PHY1_PMA_TX_CLK
+    PHY1_MAC_TX_PIPE_COUNT: 1
+    PHY1_MAC_TX_IFG_COUNT: 8
+    PHY1_HOST_NIC_EN: 1
+
+    PHY2_EN: 1
+    PHY2_SPEED: 10G
+    PHY2_PCS_ENYX: 1
+    PHY2_PCS_RX_PIPE_COUNT: 0
+    PHY2_PCS_TX_PIPE_COUNT: 0
+    PHY2_MAC_DATA_WIDTH: 32
+    PHY2_MAC_RX_MIN_PKT_LENGTH: 1
+    PHY2_MAC_RX_CLK: PHY2_PMA_TX_CLK
+    PHY2_MAC_RX_PIPE_COUNT: 0
+    PHY2_MAC_TX_CLK: PHY2_PMA_TX_CLK
+    PHY2_MAC_TX_PIPE_COUNT: 1
+    PHY2_MAC_TX_IFG_COUNT: 8
+
+################
+## DMA CONFIG ##
+################
+
+# PCIe global MTU configuration. This MTU can be overriden by each individual DMA channel and specific to each direction
+    PCIE_DMA_MTU: 2048
+# PCIe global CPU to FPGA buffer size configuration. Each DMA channel will have, if not overriden, 2^^PCIE_DMA_BUFFER_POW2 Bytes of buffer space. This can be overriden by each individual DMA CPU to FPGA channel
+    PCIE_DMA_BUFFER_POW2: 16
+
+    PCIE_DMA_0_EN: 1
+    PCIE_DMA_0_FPGA2CPU_USAGE: TCP0_CHAN0_DATA
+# If set to 1, FPGA to CPU packets will be stored inside the buffer and only forwarded once the entire packet is available, ensuring a continuous stream of data between the start of packet and end of packet.
+# The sideband "size" signal will be ignored if the store and forward feature is enabled.
+# If the store and forward feature is disabled (set to 0) and the sideband "size" signal is set to 0, then 128 Byte packet chunks will still be store and forwarded to compute the size signal required by the system.
+# If the store and forward feature is disabled (set to 0) and the sideband "size" signal is set by the user then no store and forward will be performed. The user in this case must ensure that the size is exactly equal to the actual packet size, and the packet must be provided in a continuous stream.
+    PCIE_DMA_0_FPGA2CPU_STORE_AND_FORWARD: 0
+    PCIE_DMA_0_FPGA2CPU_MTU: 2048
+    PCIE_DMA_0_CPU2FPGA_USAGE: TCP0_CHAN0_DATA
+# If set to 1, CPU to FPGA packets will be stored inside the buffer and only forwarded to the sandbox once the entire packet is available, ensuring a continuous stream of data between the start of packet and end of packet
+    PCIE_DMA_0_CPU2FPGA_STORE_AND_FORWARD: 0
+    PCIE_DMA_0_CPU2FPGA_MTU: 2048
+    PCIE_DMA_0_CPU2FPGA_BUFFER_SIZE_POW2: 14
+
+    PCIE_DMA_1_EN: 1
+    PCIE_DMA_1_FPGA2CPU_USAGE: TCP0_CHAN0_EMI
+    PCIE_DMA_1_FPGA2CPU_STORE_AND_FORWARD: 0
+    PCIE_DMA_1_FPGA2CPU_MTU: 128
+    PCIE_DMA_1_CPU2FPGA_USAGE: TCP0_CHAN0_EMI
+    PCIE_DMA_1_CPU2FPGA_STORE_AND_FORWARD: 0
+    PCIE_DMA_1_CPU2FPGA_MTU: 128
+    PCIE_DMA_1_CPU2FPGA_BUFFER_SIZE_POW2: 11
+
+##################
+## NETIF CONFIG ##
+##################
+
+# PCIe global NETIF configuration. This MTU can be overriden by each individual NETIF channel and specific to each direction
+    PCIE_NETIF_MTU: 2048
+# PCIe global CPU to FPGA NETIF buffer size configuration. Each NETIF channel will have, if not overriden, 2^^PCIE_NETIF_BUFFER_POW2 Bytes of buffer space. This can be overriden by each individual NETIF CPU to FPGA channel
+    PCIE_NETIF_BUFFER_POW2: 14
+
+# Drop mode and S&F are activated because performance is not required and we dont want to impact critical data path
+    PCIE_NIC_0_EN: 1
+    PCIE_NIC_0_FPGA2CPU_DROP_MODE: 1
+    PCIE_NIC_0_FPGA2CPU_STORE_AND_FORWARD: 1
+    PCIE_NIC_0_FPGA2CPU_MTU: 2048
+    PCIE_NIC_0_CPU2FPGA_MTU: 2048
+    PCIE_NIC_0_CPU2FPGA_BUFFER_SIZE_POW2: 14
+
+    PCIE_NIC_1_EN: 1
+    PCIE_NIC_1_FPGA2CPU_DROP_MODE: 1
+    PCIE_NIC_1_FPGA2CPU_STORE_AND_FORWARD: 1
+    PCIE_NIC_1_FPGA2CPU_MTU: 2048
+    PCIE_NIC_1_CPU2FPGA_MTU: 2048
+    PCIE_NIC_1_CPU2FPGA_BUFFER_SIZE_POW2: 14
+
+
+Application configuration:
+
+##################
+## SANDBOX      ##
+##################
+
+# Selection of the user sandbox to use. This sandbox selection is done inside the shell module file, so if any new sandbox are to be created, they are to be added inside the shell module file itself, and can then be targetted from the YAML directly
+    SANDBOX_NAME: 'nxuser_sandbox_smartnic'
+
+# Next section selects sandbox data signal widths and the clocks used for each interfaces.
+# For each interface, if the clock selected differs from the corresponding PHY selected clock, a dual clock FIFO will automatically be added inside the shell module glue logic.
+# If the data widths do not match the PCIe default size width (256) for DMA channels, or if they do not match the INTERNAL data widths for TCP, UDP and RAW interfaces then resize modules are automatically added.
+    #SANDBOX_MM_CLK: INTERNAL_50_CLK
+    SANDBOX_MM_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_PHY0_LINK_STATUS_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_PHY1_LINK_STATUS_CLK: PHY1_PMA_TX_CLK
+    SANDBOX_PHY2_LINK_STATUS_CLK: PHY2_PMA_TX_CLK
+
+    SANDBOX_TCP_ST_IN_DATA_WIDTH: 256
+    SANDBOX_TCP_ST_OUT_DATA_WIDTH: 256
+    SANDBOX_TCP0_ST_IN_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_TCP0_ST_OUT_CLK: PHY0_PMA_TX_CLK
+
+    SANDBOX_TCP_EMI_ST_IN_DATA_WIDTH: 256
+    SANDBOX_TCP0_EMI_ST_IN_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_TCP0_EMI_ST_OUT_CLK: PHY0_PMA_TX_CLK
+
+    SANDBOX_TCP_FILTERED_ST_IN_DATA_WIDTH: 256
+    SANDBOX_TCP0_FILTERED_ST_IN_CLK: PHY0_PMA_TX_CLK
+
+    SANDBOX_RAW_ST_IN_DATA_WIDTH: 256
+    SANDBOX_RAW_ST_OUT_DATA_WIDTH: 256
+    SANDBOX_RAW0_ST_IN_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_RAW0_ST_OUT_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_RAW1_ST_IN_CLK: PHY1_PMA_TX_CLK
+    SANDBOX_RAW1_ST_OUT_CLK: PHY1_PMA_TX_CLK
+
+    SANDBOX_DMA_ST_IN_DATA_WIDTH: 256
+    SANDBOX_DMA_ST_OUT_DATA_WIDTH: 256
+    SANDBOX_DMA0_ST_IN_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_DMA0_ST_OUT_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_DMA1_ST_IN_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_DMA1_ST_OUT_CLK: PHY0_PMA_TX_CLK
+
+    SANDBOX_NETIF_ST_IN_DATA_WIDTH: 256
+    SANDBOX_NETIF_ST_OUT_DATA_WIDTH: 256
+    SANDBOX_NETIF0_ST_IN_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_NETIF0_ST_OUT_CLK: PHY0_PMA_TX_CLK
+    SANDBOX_NETIF1_ST_IN_CLK: PHY1_PMA_TX_CLK
+    SANDBOX_NETIF1_ST_OUT_CLK: PHY1_PMA_TX_CLK
+
+#- SANDBOX_MEM_SELECT: MEM0MEM1
+
+###########
+## TCP   ##
+###########
+
+# TCP stack configuration, and mapping to a specified PHY.
+# Here is where the INTERNAL data widths can be set, that can potentially differ from the sandbox data widths.
+    TCP0_EN: 1
+    TCP0_PHY_SELECT: PHY0
+
+    TCP0_ULL_EN: 1
+    TCP0_MTU: 2048
+    TCP0_FILTERED_EN: 1
+    TCP0_INTERNAL_ST_DATA_WIDTH: 32
+    TCP0_EMI_INTERNAL_ST_DATA_WIDTH: 32
+    TCP0_FILTERED_INTERNAL_ST_DATA_WIDTH: 32
+
+    TCP0_RX_HASHTABLE_EN: 0
+    TCP0_RX_REORDERING_EN: 0
+    TCP0_TX_FAST_READY_EN: 1
+    TCP0_TX_CONGESTION_CONTROL_EN: 0
+    TCP0_SESSION_COUNT: 64
+    TCP0_RX_FIFO_MAX_PACKET_COUNT: 64
+    TCP0_RX_FIFO_BYTE_COUNT: 6144
+    TCP0_INSTANT_ACK_EN: 1
+    TCP0_TX_DROP_IF_NOT_ESTABLISHED_EN: 0
+    TCP0_PEER_IPV4_ADDRESS_COUNT: 16
+    TCP0_VLAN_COUNT: 2
+    TCP0_MAC_ADDRESS_COUNT: 2
+    TCP0_VIRTUAL_INTERFACES_COUNT: 4
+    TCP0_RX_OOS_SEQNUM_EN: 0
+    TCP0_TX_RETRANSMIT_MEM_ADDR_WIDTH: 20
+    TCP0_TX_RETRANSMIT_MEM_DATA_WIDTH: 64
+    TCP0_TX_RETRANSMIT_MEM_CLK: CUSTOM_CLK_0
+    TCP0_TX_RETRANSMIT_MEM_INTERNAL_RAM_TYPE: 'large_block'
+    TCP0_TX_RETRANSMIT_MEM_INTERNAL_LATENCY: 10
+    TCP0_RX_OUTPUT_PIPE_COUNT: 1
+    TCP0_TX_OUTPUT_PIPE_COUNT: 0
+
+    TCP0_FORCE_M20K_EN: 0
+
+    TCP0_EMI_STATUS_EN: 1
+    TCP0_EMI_CREDIT_EN: 1
+
+# TCP from Sandbox and TCP to Sandbox FIFO configurations. Neither side requires either a dual clock FIFO nor a Store and Forward feature nor a Clean Drop feature.
+# Latency being important in these designs, no PIPE is added on the DATA paths.
+    TCP0_TO_SB_FIFO_EN: 0
+    TCP0_TO_SB_FIFO_STORE_FW: 0
+    TCP0_TO_SB_FIFO_CLEAN_DROP: 0
+    TCP0_TO_SB_PIPE_COUNT: 0
+
+    TCP0_FROM_SB_FIFO_EN: 0
+    TCP0_FROM_SB_FIFO_STORE_FW: 0
+    TCP0_FROM_SB_FIFO_CLEAN_DROP: 0
+    TCP0_FROM_SB_PIPE_COUNT: 0
+
+# The EMI does not require neither a dual clock FIFO nor a Store and Forward feature nor a Clean Drop feature.
+# However the latency on the EMI is not as important and pipes can therefore be added to help close timings if the complete system has a hard time closing these timings.
+    TCP0_EMI_TO_SB_FIFO_EN: 0
+    TCP0_EMI_TO_SB_FIFO_STORE_FW: 0
+    TCP0_EMI_TO_SB_FIFO_CLEAN_DROP: 0
+    TCP0_EMI_TO_SB_PIPE_COUNT: 4
+
+# We do not want to back-pressure the filtered interface, since back-pressuring this could block the TCP stack itself when the NETIF is only enabled in the smartnic design as a debugging device.
+# The S&F and drop mode is activated on the NETIF side
+# The latency of the filtered interface is not as important and pipes can therefore be added to help close timings if the complete system has a hard time closing these timings.
+    TCP0_FILTERED_TO_SB_FIFO_EN: 0
+    TCP0_FILTERED_TO_SB_FIFO_STORE_FW: 0
+    TCP0_FILTERED_TO_SB_FIFO_CLEAN_DROP: 0
+    TCP0_FILTERED_TO_SB_PIPE_COUNT: 4
+
+###########
+## RAW   ##
+###########
+
+# RAW interface configuration, and mapping to a specified PHY.
+# Here is where the INTERNAL data widths can be set, that can potentially differ from the sandbox data widths.
+
+# Netif0 is connected through RAW0
+    RAW0_FROM_SB_EN: 1
+    RAW0_FROM_SB_ARBITER_PIPE_COUNT: 1
+    RAW0_PHY_SELECT: PHY0
+    RAW0_MTU: 2048
+    RAW0_INTERNAL_ST_DATA_WIDTH: 32
+
+# Netif1 is connected through RAW1
+    RAW1_FROM_SB_EN: 1
+    RAW1_FROM_SB_ARBITER_PIPE_COUNT: 1
+    RAW1_PHY_SELECT: PHY1
+    RAW1_MTU: 2048
+    RAW1_INTERNAL_ST_DATA_WIDTH: 32
+
+###########
+##  DMA  ##
+###########
+
+    DMA0_FPGA2CPU_PIPE_COUNT: 2
+    DMA0_CPU2FPGA_PIPE_COUNT: 2
+
+    DMA1_FPGA2CPU_PIPE_COUNT: 2
+    DMA1_CPU2FPGA_PIPE_COUNT: 2
+

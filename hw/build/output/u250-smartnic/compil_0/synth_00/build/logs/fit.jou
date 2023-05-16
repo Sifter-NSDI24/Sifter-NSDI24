@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:47:39 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Thu May  4 01:34:51 2023
+# Process ID: 2406195
+# Current directory: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build
+# Command line: vivado -journal logs/fit.jou -log logs/fit.log -mode batch -source ../fit.tcl
+# Log file: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/logs/fit.log
+# Journal file: /home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/logs/fit.jou
+# Running On: ratio, OS: Linux, CPU Frequency: 1210.471 MHz, CPU Physical cores: 8, Host memory: 33525 MB
+#-----------------------------------------------------------
+source ../fit.tcl

@@ -1,0 +1,10 @@
+[92m[39m
+u250-smartnic
++---------------+-------+-----------------+----------------+---------------------+--------------------------+--------------------------+----------------------+-----------------------+
+| Entity name   |   WNS | Success ratio   | Warning        | Status              | Logic                    | Registers                | Memory Blocks        | Large Memory Blocks   |
++===============+=======+=================+================+=====================+==========================+==========================+======================+=======================+
+| src           | [92m0.015[39;49m | 1/1 (100.0%)    | [91mCHECK WARNINGS[39;49m | [92mCOMPILATION_SUCCESS[39;49m | 109135 / 1728000 (6.32%) | 170680 / 3456000 (4.94%) | 223.5 / 2688 (8.31%) | 256 / 1280 (20.0%)    |
++---------------+-------+-----------------+----------------+---------------------+--------------------------+--------------------------+----------------------+-----------------------+[39;49m[39;49m
+[92mAll compilations passed with success[39;49m
+[92m/home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/output/u250-smartnic.rbf[39;49m
+[92m/home/anthony/Enyx/5.9/nxFramework-example-designs-Vanilla-u200-u250-main-1673983368283/hw/build/output/u250-smartnic/compil_0/synth_00/build/output/u250-smartnic.bit[39;49m
